@@ -1,0 +1,41 @@
+<div class="main-content-form">
+    <a href="/users" class="back-button">
+        <span class="arrow">←</span>
+        <h3>Retour</h3>
+    </a>
+    <h1>Ajouter un utilisateur - 245</h1>
+    <form [formGroup]="form" (ngSubmit)="saveData()" class="form-ajout">
+        <div class="left-section">
+
+            <div class="form-group">
+                <input formControlName="username" [class.is-invalid]="isInvalidateInput(form.controls['username'])" type="text" id="admin" name="username" placeholder="username" required>
+                <small style="color: red;" *ngIf="isInvalidateInput(form.controls['username'])">
+                    Le username est requis !
+                </small>
+            </div>
+
+            <!-- <div class="form-group">
+                <input type="text" id="a-mdepasse" name="a-mdepasse" placeholder="Ancien mot de passe">
+            </div> -->
+
+
+            <div class="form-group">
+                <input formControlName="password" [class.is-invalid]="isInvalidateInput(form.controls['password'])" type="text" id="nv-mdepasse" name="passsword" placeholder="Nouveau mot de passe" required>
+                <small style="color: red;" *ngIf="isInvalidateInput(form.controls['password'])">
+                    Le username est requis !
+                </small>
+            </div>
+
+            <div class="form-group">
+                <input formControlName="password" [class.is-invalid]="isInvalidateInput(form.controls['password'])" type="text" id="nv-mdepasse" name="passsword" placeholder="Nouveau mot de passe" required>
+                <small style="color: red;" *ngIf="isInvalidateInput(form.controls['password'])">
+                    Le username est requis !
+                </small>
+            </div>
+            <div class="buttons">
+                <button type="reset" class="btn buttonRed">Annuler</button>
+                <button type="submit" class="btn buttonGreen">Enregistrer</button>
+            </div>
+        </div>
+    </form>
+</div>

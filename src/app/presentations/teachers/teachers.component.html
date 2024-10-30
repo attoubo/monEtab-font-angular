@@ -1,0 +1,46 @@
+<div class="main-content">
+    <h1>Professeurs (2)</h1>
+    <button class="buttonBlue" [routerLink]="['/add-teacher']" id="addStudent">+ Nouveau professeur</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Matiere</th>
+                <th>Vacant</th>
+                <th>Âge</th>
+                <th>Téléphone</th>
+                <th>Ville</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>KOFFI</td>
+                <td>George</td>
+                <td>Mathematic</td>
+                <td>OUI</td>
+                <td>48</td>
+                <td>0723456789</td>
+                <td>Bonoua</td>
+                <td>
+                    <button [routerLink]="['/add-teacher']" class="buttonOrg">Modifier</button>
+                    <button onclick="showConfirmationPopup()" class="buttonRed">Supprimer</button>
+                </td>
+            </tr>
+            <tr>
+                <td>KONE</td>
+                <td>Solal</td>
+                <td>Computer Science</td>
+                <td>NON</td>
+                <td>32</td>
+                <td>0123456789</td>
+                <td>Abidjan</td>
+                <td>
+                    <button [routerLink]="['/add-teacher']" class="buttonOrg">Modifier</button>
+                    <button onclick="showConfirmationPopup()" class="buttonRed">Supprimer</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

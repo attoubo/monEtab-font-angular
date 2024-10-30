@@ -1,0 +1,25 @@
+<div class="" style="display: flex;">
+    <div class="sidebar" th:fragment="sidebar">
+        <div class="logo-container">
+            <img src="assets/logo-monEtab.png" th:src="@{${school?.urlLogo}}" th:if="${school != null}" width="70px" alt="Logo de l'école">
+        </div>
+
+        <a class="" style="text-decoration: none; color: none" href="/home"><h1 th:text="${school?.name}">School Name</h1></a>
+        <ul>
+            <li><a class="" href="/home">Tableau de bord</a></li>
+            <li><a href="/students">Élèves</a></li>
+            <li><a href="/teachers">Professeurs</a></li>
+            <li><a href="/users">Utilisateurs</a></li>
+            <li><a href="/reports">Rapports</a></li>
+            <!-- <li><a href="/#">Paramètres application</a></li>
+            <li><a href="/#">Paramètres école</a></li> -->
+    
+        </ul>
+        <a href="#" id="logout" th:href="@{/logout}" class="logout-btn">Déconnexion</a>
+    </div>
+    
+
+    <div class="main-content">
+        <router-outlet />
+    </div>
+</div>

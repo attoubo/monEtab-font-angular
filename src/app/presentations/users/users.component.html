@@ -1,0 +1,29 @@
+<div class="main-content">
+    <h1>Utilisateurs (2)</h1>
+    <button class="buttonBlue" id="addStudent" [routerLink]="['/add-users']">+ Nouveau utilisateur</button>
+    <table>
+        <thead>
+            <tr>
+                <th>Pseudo</th>
+                <th>Date de creation</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Admin</td>
+                <td>16/08/2024</td>
+                <td>
+                    <button class="buttonOrg" [routerLink]="['/add-users']">Modifier</button>
+                </td>
+            </tr>
+            <tr>
+                <td>Admin</td>
+                <td>13/08/2024</td>
+                <td>
+                    <button class="buttonOrg" [routerLink]="['/add-users']">Modifier</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
