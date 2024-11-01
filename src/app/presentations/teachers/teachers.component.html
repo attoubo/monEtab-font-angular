@@ -1,11 +1,12 @@
 <div class="main-content">
-    <h1>Professeurs (2)</h1>
+    <h1>Professeurs ({{ teachers.length }})</h1>
     <button class="buttonBlue" [routerLink]="['/add-teacher']" id="addStudent">+ Nouveau professeur</button>
     <table>
         <thead>
             <tr>
                 <th>Nom</th>
                 <th>Prénom</th>
+                <th>Genre</th>
                 <th>Matiere</th>
                 <th>Vacant</th>
                 <th>Âge</th>
@@ -15,32 +16,40 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>KOFFI</td>
-                <td>George</td>
-                <td>Mathematic</td>
-                <td>OUI</td>
-                <td>48</td>
-                <td>0723456789</td>
-                <td>Bonoua</td>
+            <tr *ngFor="let teacher of teachers">
+                <td>{{ teacher.firstName }}</td>
+                <td>{{ teacher.lastName }}</td>
+                <td>{{ teacher.gender }}</td>
+                <td>{{ teacher.speciality }}</td>
+                <td>{{ teacher.available }}</td>
+                <td>{{ teacher.birthday }}</td>
+                <td>{{ teacher.phoneNumber }}</td>
+                <td>{{ teacher.address?.city }}</td>
                 <td>
-                    <button [routerLink]="['/add-teacher']" class="buttonOrg">Modifier</button>
-                    <button onclick="showConfirmationPopup()" class="buttonRed">Supprimer</button>
-                </td>
-            </tr>
-            <tr>
-                <td>KONE</td>
-                <td>Solal</td>
-                <td>Computer Science</td>
-                <td>NON</td>
-                <td>32</td>
-                <td>0123456789</td>
-                <td>Abidjan</td>
-                <td>
-                    <button [routerLink]="['/add-teacher']" class="buttonOrg">Modifier</button>
-                    <button onclick="showConfirmationPopup()" class="buttonRed">Supprimer</button>
+                    <button [routerLink]="['/add-teacher', teacher.id]" class="buttonOrg">Modifier</button>
+                    <button (click)="confirmDelete(teacher)" class="buttonRed">Supprimer</button>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
+
+
+<!-- Modal de confirmation -->
+<div class="modal fade" tabindex="-1" [ngClass]="{'show': isConfirmModalVisible}" [ngStyle]="{'display': isConfirmModalVisible ? 'block' : 'none'}" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmer la suppression</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeConfirmModal()"></button>
+        </div>
+        <div class="modal-body">
+          <p>Êtes-vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeConfirmModal()">Annuler</button>
+          <button type="button" class="btn btn-danger" (click)="deleteTeacher()">Confirmer</button>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -4,11 +4,12 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, ReactiveFormsModu
 import { BaseService } from '../../core/services/base-services/base.service';
 import { Student } from '../../domains/interfaces/Student';
 import { environmentProd } from '../../../environments/environement.prod';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-student-form',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, RouterLink, CommonModule],
   templateUrl: './student-form.component.html',
   styleUrls: ['../shared/css/styles.css'],
   // providers: [MessageService]
@@ -16,27 +17,14 @@ import { environmentProd } from '../../../environments/environement.prod';
 })
 
 export class StudentFormComponent implements OnInit{
+  students: Student[] = [];
+  student!: Student; // Pour stocker l'élève à modifier
+  isEditMode: boolean = false; // Pour savoir si nous sommes en mode modification
 
   form!: FormGroup;
 
-  constructor(private baseService: BaseService, private fb: FormBuilder) {
+  constructor(private baseService: BaseService, private fb: FormBuilder, private router: Router, private route: ActivatedRoute) {
   }
-
-
-  student: Student = {
-    matricule: '',
-    fatherPhoneNumber: '',
-    id: 0,
-    firstName: '',
-    lastName: '',
-    phoneNumber: '',
-    birthday: undefined,
-    urlLogo: '',
-    gender: undefined,
-    address: undefined,
-    user: undefined
-  }
-
 
 
   ngOnInit(): void {
@@ -50,10 +38,49 @@ export class StudentFormComponent implements OnInit{
       birthday: new FormControl("", [Validators.required]),
 
     })
+
+
+    this.student = {
+      matricule: '',
+      fatherPhoneNumber: '',
+      id: 0,
+      firstName: '',
+      lastName: '',
+      phoneNumber: '',
+      birthday: undefined,
+      urlLogo: '',
+      gender: undefined,
+      address: undefined,
+      user: undefined
+    }
+
+
+    const id = this.route.snapshot.paramMap.get('id'); // Récupérez l'ID depuis les paramètres de la route
+    if (id) {
+        this.loadStudent(id); // Chargez l'élève si l'ID existe
+    }
   }
+
+
+  loadStudent(id: string): void {
+    this.baseService.getOne<Student>('students', id).subscribe(
+      data => {
+        this.student = data;
+        this.form.patchValue(this.student);      },
+      error => {
+          console.error('Erreur lors du chargement de l\'élève', error);
+      }
+    );
+  }
+  
 
   isInvalidateInput(input: AbstractControl<any>) {
     return input.invalid && (input.touched || input.dirty);
+  }
+
+
+  updateStudent(eleve: any) {
+    this.router.navigate(['/add-student'], { state: { eleve: eleve } });
   }
 
 
@@ -69,22 +96,23 @@ export class StudentFormComponent implements OnInit{
         this.student.birthday = this.form.value.birthday;
 
 
-        // this.baseService.create(environmentProd.endPoint.students.create, this.student).subscribe({
-        //     next: (response: any) => {
-        //         console.log(response); // Check if this logs correctly
+        this.baseService.create(environmentProd.endPoint.students.create, this.student).subscribe({
+            next: (response: any) => {
+                console.log(response); // Check if this logs correctly
 
-        //         // this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
+                // this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
                 
-        //         this.form.reset();
-        //     },
-        //     error: (error: any) => {
-        //         console.error('Error occurred:', error);
-        //     }
-        // });
+                this.form.reset();
+                this.router.navigate(['/students']);
+            },
+            error: (error: any) => {
+                console.error('Error occurred:', error);
+            }
+        });
+
         console.log(this.student);
         
     }
-}
-
+  }
 
 }

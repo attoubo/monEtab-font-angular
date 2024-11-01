@@ -3,7 +3,7 @@
         <span class="arrow">←</span>
         <h3>Retour</h3>
     </a>
-    <h1>Ajouter un Professeur</h1>
+    <h1>{{ teacher ? ' Ajouter un Professeur' : ' Modifier Le Professeur'}}</h1>
     <form [formGroup]="form" (ngSubmit)="saveData()" class="form-ajout">
         <div class="left-section">
             <div class="form-group">
@@ -30,7 +30,7 @@
                            type="radio" 
                            id="homme" 
                            name="gender" 
-                           value="Homme" 
+                           value="MAN" 
                            required>
                     <label for="homme">Homme</label>
             
@@ -39,7 +39,7 @@
                            type="radio" 
                            id="femme" 
                            name="gender" 
-                           value="Femme" 
+                           value="WOMAN" 
                            required>
                     <label for="femme">Femme</label>
                 </div>
@@ -88,8 +88,8 @@
             </div>
         </div>
         <div class="buttons">
-            <button type="reset" class="btn btn-annuler">Annuler</button>
-            <button type="submit" class="btn btn-enregistrer">Enregistrer</button>
+            <button [routerLink]="['/teachers']" type="reset" class="btn btn-danger">Annuler</button>
+            <button type="submit" class="btn btn-success">Enregistrer</button>
         </div>
     </form>
 </div>

@@ -1,5 +1,5 @@
 <div class="main-content">
-    <h1>Utilisateurs (2)</h1>
+    <h1>Utilisateurs ({{users.length}})</h1>
     <button class="buttonBlue" id="addStudent" [routerLink]="['/add-users']">+ Nouveau utilisateur</button>
     <table>
         <thead>
@@ -10,16 +10,9 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>Admin</td>
-                <td>16/08/2024</td>
-                <td>
-                    <button class="buttonOrg" [routerLink]="['/add-users']">Modifier</button>
-                </td>
-            </tr>
-            <tr>
-                <td>Admin</td>
-                <td>13/08/2024</td>
+            <tr *ngFor="let user of users">
+                <td>{{user.pseudo}}</td>
+                <td>{{user.creationDate}}</td>
                 <td>
                     <button class="buttonOrg" [routerLink]="['/add-users']">Modifier</button>
                 </td>

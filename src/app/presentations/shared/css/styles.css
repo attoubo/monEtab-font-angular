@@ -111,11 +111,17 @@ body {
     background-color: #016641;
 }
 
+.modal.show {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5); /* Arrière-plan estompé */
+  }
+  
+
 
 button[type="submit"] {
     /* width: 100%;*/
     padding: 10px;
-    background-color: #007bff;
+    background-color: #198754;
     color: white;
     border: none;
     border-radius: 5px;
@@ -173,7 +179,7 @@ button[type="submit"] {
 
 .main-content {
     flex-grow: 1;
-    padding: 20px;
+    padding: 40px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -187,8 +193,8 @@ button[type="submit"] {
 
 .main-content-dashboard{
     margin-top: 5%;
-    margin-right: 10%;
-    margin-left: 10%;
+    /* margin-right: 10%;
+    margin-left: 10%; */
     flex-grow: 1;
     padding: 20px;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
@@ -197,7 +203,7 @@ button[type="submit"] {
 .stats {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: space-evenly;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 
 }
@@ -209,7 +215,6 @@ button[type="submit"] {
     border-radius: 10px;
     flex: 0 0 40%; 
     text-align: center;
-
     border: 2px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); 
 }

@@ -3,20 +3,19 @@
         <span class="arrow">←</span>
         <h3>Retour</h3>
     </a>
-    <h1>Ajouter un élève</h1>
+    <h1>{{ student ? ' Ajouter un élève' : ' Modifier L\'élève'}}</h1>
     <form [formGroup]="form" (ngSubmit)="saveData()" class="form-ajout">
         <div class="left-section">
             <div class="form-group">
                 <label for="nom">Nom</label>
-                <input formControlName="firstName" [class.is-invalid]="isInvalidateInput(form.controls['firstName'])" type="text" id="nom" name="firstName" required>
+                <input formControlName="firstName" [(ngModel)]="student.firstName" [class.is-invalid]="isInvalidateInput(form.controls['firstName'])" type="text" id="nom" name="firstName" required>
                 <small style="color: red;" *ngIf="isInvalidateInput(form.controls['firstName'])">
                     Le Nom est requis !
                 </small>
             </div>
-
             <div class="form-group">
                 <label for="prenom">Prénom</label>
-                <input formControlName="lastName" [class.is-invalid]="isInvalidateInput(form.controls['lastName'])" type="text" id="prenom" name="lastName" required>
+                <input formControlName="lastName" [(ngModel)]="student.lastName" [class.is-invalid]="isInvalidateInput(form.controls['lastName'])" type="text" id="prenom" name="lastName" required>
                 <small style="color: red;" *ngIf="isInvalidateInput(form.controls['lastName'])">
                     Le Prenom est requis !
                 </small>
@@ -30,16 +29,16 @@
                            type="radio" 
                            id="homme" 
                            name="gender" 
-                           value="Homme" 
+                           value="MAN" 
                            required>
                     <label for="homme">Homme</label>
-            
+        
                     <input formControlName="gender" 
                            [class.is-invalid]="isInvalidateInput(form.controls['gender'])" 
                            type="radio" 
                            id="femme" 
                            name="gender" 
-                           value="Femme" 
+                           value="WOMAN" 
                            required>
                     <label for="femme">Femme</label>
                 </div>
@@ -92,7 +91,7 @@
             </div>
         </div>
         <div class="buttons">
-            <button type="reset" class="btn buttonRed">Annuler</button>
+            <button [routerLink]="['/students']" type="reset"  class="btn buttonRed">Annuler</button>
             <button type="submit" class="btn buttonGreen">Enregistrer</button>
         </div>
     </form>

@@ -1,5 +1,5 @@
 <div class="main-content">
-    <h1>Élèves (2)</h1>
+    <h1>Élèves ({{ students.length }})</h1>
     <button class="buttonBlue" [routerLink]="['/add-student']" id="addStudent">+ Nouvel élève</button>
     <table>
         <thead>
@@ -7,7 +7,7 @@
                 <th>Nom</th>
                 <th>Prénom</th>
                 <th>Genre</th>
-                <th>Classe</th>
+                <!-- <th>Classe</th> -->
                 <th>Matricule</th>
                 <th>Âge</th>
                 <th>Téléphone</th>
@@ -16,56 +16,39 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>KOFFI</td>
-                <td>George</td>
-                <td>M</td>
-                <td>1ère C</td>
-                <td>GDJ7GDGD</td>
-                <td>18</td>
-                <td>0123456789</td>
-                <td>Bonoua</td>
+            <tr *ngFor="let student of students">
+                <td>{{ student.firstName }}</td>
+                <td>{{ student.lastName }}</td>
+                <td>{{ student.gender }}</td>
+                <!-- <td>{{ student.class }}</td> -->
+                <td>{{ student.matricule }}</td>
+                <td>{{ student.birthday }}</td>
+                <td>{{ student.phoneNumber }}</td>
+                <td>{{ student.address?.city }}</td>
                 <td>
-                    <button [routerLink]="['/add-student']" class="buttonOrg">Modifier</button>
-                    <button onclick="showConfirmationPopup()" class="buttonRed">Supprimer</button>
-                </td>
-            </tr>
-            <tr>
-                <td>KONE</td>
-                <td>Solal</td>
-                <td>F</td>
-                <td>2nd C</td>
-                <td>GDJ7GDGD</td>
-                <td>22</td>
-                <td>0123456789</td>
-                <td>Abidjan</td>
-                <td>
-                    <button [routerLink]="['/add-student']" class="buttonOrg">Modifier</button>
-                    <button (click)="showConfirmationPopup()" class="buttonRed">Supprimer</button>
+                    <button [routerLink]="['/add-student', student.id]" class="buttonOrg">Modifier</button>
+                    <button (click)="confirmDelete(student)" class="buttonRed">Supprimer</button>
                 </td>
             </tr>
         </tbody>
     </table>
 </div>
 
-<!-- <div *ngIf="popupVisible" id="confirmationPopup" class="popup">
-    <div class="popup-content">
-        <h2>ATTENTION !!!</h2>
-        <p>Voulez-vous supprimer cet élève ?</p>
-        <div class="popup-buttons">
-            <button id="cancelBtn" class="btn">Non</button>
-            <button id="confirmBtn" class="btn">Oui</button>
+<!-- Modal de confirmation -->
+<div class="modal fade" tabindex="-1" [ngClass]="{'show': isConfirmModalVisible}" [ngStyle]="{'display': isConfirmModalVisible ? 'block' : 'none'}" role="dialog">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Confirmer la suppression</h5>
+          <button type="button" class="btn-close" aria-label="Close" (click)="closeConfirmModal()"></button>
         </div>
-    </div>
-</div> -->
-
-<div *ngIf="popupVisible" id="confirmationPopup" class="popup">
-    <div class="popup-content">
-        <h2>ATTENTION !!!</h2>
-        <p>Voulez-vous supprimer cet élève ?</p>
-        <div class="popup-buttons">
-            <button (click)="hideConfirmationPopup()" class="btn">Non</button>
-            <button (click)="hideConfirmationPopup()" class="btn">Oui</button>
+        <div class="modal-body">
+          <p>Êtes-vous sûr de vouloir supprimer cet élément ? Cette action est irréversible.</p>
         </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" (click)="closeConfirmModal()">Annuler</button>
+          <button type="button" class="btn btn-danger" (click)="deleteStudent()">Confirmer</button>
+        </div>
+      </div>
     </div>
-</div>
+  </div>

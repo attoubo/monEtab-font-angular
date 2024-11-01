@@ -22,14 +22,14 @@
             <div class="form-group">
                 <input formControlName="password" [class.is-invalid]="isInvalidateInput(form.controls['password'])" type="text" id="nv-mdepasse" name="passsword" placeholder="Nouveau mot de passe" required>
                 <small style="color: red;" *ngIf="isInvalidateInput(form.controls['password'])">
-                    Le username est requis !
+                    Le Mot de passe est requis !
                 </small>
             </div>
 
             <div class="form-group">
-                <input formControlName="password" [class.is-invalid]="isInvalidateInput(form.controls['password'])" type="text" id="nv-mdepasse" name="passsword" placeholder="Nouveau mot de passe" required>
+                <input formControlName="confirmPassword" [class.is-invalid]="isInvalidateInput(form.controls['confirmPassword'])" type="text" id="nv-mdepasse" name="confirmPassword" placeholder="Nouveau mot de passe" required>
                 <small style="color: red;" *ngIf="isInvalidateInput(form.controls['password'])">
-                    Le username est requis !
+                    Le Mot de passe est requis !
                 </small>
             </div>
             <div class="buttons">

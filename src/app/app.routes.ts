@@ -9,19 +9,22 @@ import { ReportComponent } from './presentations/report/report.component';
 import { StudentFormComponent } from './presentations/student-form/student-form.component';
 import { TeacherFormComponent } from './presentations/teacher-form/teacher-form.component';
 import { UsersFormComponent } from './presentations/users-form/users-form.component';
+import { SidebarComponent } from './presentations/sidebar/sidebar.component';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' }, 
   {
     path: '',
-    component: LayoutComponent, 
+    component: SidebarComponent, 
     children: [
       { path: 'home', component: HomeComponent, title: 'Tableau de bord' },
       { path: 'students', component: StudentsComponent, title: 'Eleves' },
       { path: 'add-student', component: StudentFormComponent, title: 'Ajouter Élève' },
+      { path: 'add-student/:id', component: StudentFormComponent, title: 'Modifier Élève' },
       { path: 'teachers', component: TeachersComponent, title: 'Professeurs' },
       { path: 'add-teacher', component: TeacherFormComponent, title: 'Ajouter Professeur' },
+      { path: 'add-teacher/:id', component: TeacherFormComponent, title: 'Modifier Professeur' },
       { path: 'users', component: UsersComponent, title: 'Utilisateurs' },
       { path: 'add-users', component: UsersFormComponent, title: 'Ajouter Utilisateur' },
       { path: 'reports', component: ReportComponent, title: 'Rapport' }
